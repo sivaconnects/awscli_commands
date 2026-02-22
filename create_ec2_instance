@@ -1,8 +1,9 @@
 aws ec2 run-instances \
-    --image-id ami-073130f74f5ffb161 \
-    --instance-type t3.micro \
-    --count 2 \
-    --key-name aws_keypair \
-    --security-group-ids sg-09d25811b710aa1f9 \
-    --subnet-id subnet-0f0d2ac5699161fc6 \
-    --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=TestInstance_AWS}]'
+  --region eu-north-1 \
+  --image-id ami-073130f74f5ffb161 \
+  --instance-type t3.micro \
+  --count 2 \
+  --key-name aws_keypair \
+  --security-group-ids sg-09d25811b710aa1f9 \
+  --subnet-id subnet-0f0d2ac5699161fc6 \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=TestInstance_AWS}]'
