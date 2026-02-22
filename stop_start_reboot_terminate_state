@@ -1,0 +1,67 @@
+Stop Instance:
+-----------------------------------------
+aws ec2 stop-instances \
+  --instance-ids i-0f3fc4e0abf020a56 \
+  --region eu-north-1
+
+
+Check Instance State:
+-----------------------------------------
+aws ec2 describe-instances \
+  --instance-ids i-04b5fa0fd94c9fd9d \
+  --query "Reservations[].Instances[].State.Name" \
+  --output text \
+  --region eu-north-1
+
+
+Start Instance:
+-----------------------------------------
+aws ec2 start-instances \
+  --instance-ids i-04b5fa0fd94c9fd9d \
+  --region eu-north-1
+
+
+Reboot Instance:
+-----------------------------------------
+aws ec2 reboot-instances \
+  --instance-ids i-0f78264848c21b7b6 \
+  --region eu-north-1
+
+
+Terminate Instance:
+-----------------------------------------
+aws ec2 terminate-instances \
+  --instance-ids i-0f78264848c21b7b6 \
+  --region eu-north-1
+
+
+Get Instance Related Info:
+-----------------------------------------
+
+In Table Format:
+-----------------------
+aws ec2 describe-instances \
+  --filters "Name=instance-state-name,Values=running" \
+  --query "Reservations[].Instances[].{InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value}" \
+  --output table \
+  --region eu-north-1
+
+or
+
+In a Plain Text:
+-----------------------
+aws ec2 describe-instances \
+  --filters "Name=instance-state-name,Values=running" \
+  --query "Reservations[].Instances[].{ID:InstanceId,Name:Tags[?Key=='Name']|[0].Value}" \
+  --output text \
+  --region eu-north-1
+
+or
+
+Instances without Name:
+-----------------------
+aws ec2 describe-instances \
+  --filters "Name=instance-state-name,Values=running" \
+  --query "Reservations[].Instances[].{InstanceId:InstanceId,Name:(Tags[?Key=='Name']|[0].Value || 'NO_NAME')}" \
+  --output table \
+  --region eu-north-1
