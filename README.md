@@ -1,7 +1,7 @@
 
 ---
 
-# 🚀 AWS CLI Configuration & Usage Guide
+# AWS CLI Configuration & Usage Guide
 
 This repository explains **how to install, configure, and start using AWS CLI** on a Linux machine.
 
