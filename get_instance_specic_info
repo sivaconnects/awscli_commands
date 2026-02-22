@@ -60,3 +60,37 @@ aws ec2 describe-instances \
   ]" \
   --output text \
   --region eu-north-1
+
+List All EC2 instances:
+-----------------------------------------
+aws ec2 describe-instances \
+  --region eu-north-1
+
+
+
+List running EC2 instances:
+-----------------------------------------
+aws ec2 describe-instances \
+  --filters "Name=instance-state-name,Values=running" \
+  --query "Reservations[].Instances[].{
+    InstanceId:InstanceId,
+    Name:(Tags[?Key=='Name']|[0].Value || 'NO_NAME'),
+    PrivateIP:PrivateIpAddress,
+    PublicIP:PublicIpAddress
+  }" \
+  --output table \
+  --region eu-north-1
+
+or
+
+aws ec2 describe-instances \
+  --filters "Name=instance-state-name,Values=running" \
+  --query "Reservations[].Instances[].{
+    InstanceId:InstanceId,
+    Name:(Tags[?Key=='Name']|[0].Value || 'NO_NAME'),
+    PrivateIP:PrivateIpAddress,
+    PublicIP:PublicIpAddress
+  }" \
+  --output text \
+  --region eu-north-1
+
