@@ -1,0 +1,109 @@
+-------------------------------
+AWS CLI – Basic Commands
+-------------------------------
+
+Check AWS CLI version
+aws --version
+
+Verify configured AWS identity
+aws sts get-caller-identity
+
+Show AWS CLI help
+aws help
+
+Service-specific help
+aws ec2 help
+aws s3 help
+aws iam help
+
+
+-------------------------------
+EC2 Commands
+-------------------------------
+
+List all EC2 instances
+aws ec2 describe-instances
+
+List running EC2 instances
+aws ec2 describe-instances \
+  --filters "Name=instance-state-name,Values=running"
+
+Start EC2 instance
+aws ec2 start-instances --instance-ids i-xxxxxxxxxxxxxxxxx
+
+Stop EC2 instance
+aws ec2 stop-instances --instance-ids i-xxxxxxxxxxxxxxxxx
+
+Reboot EC2 instance
+aws ec2 reboot-instances --instance-ids i-xxxxxxxxxxxxxxxxx
+
+Terminate EC2 instance
+aws ec2 terminate-instances --instance-ids i-xxxxxxxxxxxxxxxxx
+
+List EC2 key pairs
+aws ec2 describe-key-pairs
+
+List security groups
+aws ec2 describe-security-groups
+
+List subnets
+aws ec2 describe-subnets
+
+
+-------------------------------
+S3 Commands
+-------------------------------
+
+List all S3 buckets
+aws s3 ls
+
+Create S3 bucket
+aws s3 mb s3://my-bucket-name
+
+Upload file to S3
+aws s3 cp file.txt s3://my-bucket-name/
+
+Download file from S3
+aws s3 cp s3://my-bucket-name/file.txt .
+
+Sync local folder to S3
+aws s3 sync ./local-folder s3://my-bucket-name/
+
+
+-------------------------------
+IAM Commands
+-------------------------------
+
+List IAM users
+aws iam list-users
+
+List IAM roles
+aws iam list-roles
+
+List IAM policies
+aws iam list-policies
+
+
+-------------------------------
+Networking
+-------------------------------
+
+List VPCs
+aws ec2 describe-vpcs
+
+List route tables
+aws ec2 describe-route-tables
+
+List internet gateways
+aws ec2 describe-internet-gateways
+
+
+-------------------------------
+Utility
+-------------------------------
+
+Dry run example (permission check)
+aws ec2 stop-instances \
+  --instance-ids i-xxxxxxxxxxxxxxxxx \
+  --dry-run
+
