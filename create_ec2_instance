@@ -1,9 +1,32 @@
+1️⃣ Simple EC2 instance (use defaults)
+👉 Uses default VPC, default subnet, default security group
+
 aws ec2 run-instances \
-  --region eu-north-1 \
   --image-id ami-073130f74f5ffb161 \
+  --count 1 \
   --instance-type t3.micro \
-  --count 2 \
+  --key-name aws_keypair
+
+
+2️⃣ EC2 instance WITH NAME (still defaults)
+👉 Adds Name tag (best practice)
+
+aws ec2 run-instances \
+  --image-id ami-073130f74f5ffb161 \
+  --count 1 \
+  --instance-type t3.micro \
   --key-name aws_keypair \
-  --security-group-ids sg-09d25811b710aa1f9 \
-  --subnet-id subnet-0f0d2ac5699161fc6 \
-  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=TestInstance_AWS}]'
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=My-DevOps-Instance}]'
+
+
+3️⃣ EC2 instance with CUSTOM SG + SUBNET (VPC chosen implicitly)
+👉 Production-style, explicit networking
+
+aws ec2 run-instances \
+  --image-id ami-073130f74f5ffb161 \
+  --count 1 \
+  --instance-type t3.micro \
+  --key-name aws_keypair \
+  --security-group-ids sg-0ce76a639d5ee21a7 \
+  --subnet-id subnet-0130d0efa2f4f3d4d \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=My-Prod-Instance}]'
